@@ -1,5 +1,6 @@
 # BIT271-GORP
 Purpose:
+
 GORP uses augmented reality (AR) and global positioning system (GPS), users can create and share custom paths rendered as three dimensional (3D) shapes through the phone’s camera.
 Unlike map-based apps, GORP utilizes relative location to provide higher position accuracy, without the use of cell-data or Wi-Fi.
 
