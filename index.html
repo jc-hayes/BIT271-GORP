@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" class="ui-mobile">
+<script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script>
+<script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name=description content="GORP">
+	<meta name="author" content="James Hayes">
+	<title>GORP</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Nova+Square|Raleway" rel="stylesheet">
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+			font-family: 'Raleway', sans-serif;
+			background-color:#ff7c1c;
+		}
+		#banner {
+			font-family: 'Nova Square', cursive;
+			font-weight: bold;
+			font-size: 34px;
+			color: #1E4072;
+			text-align: center;
+			background-color: #ff7c1c !important;
+			text-shadow: false;
+			border: 0px;
+			height: 40px;
+		}
+		.home-image {
+			height: 270px;
+			width: 100%;
+			background-color: #ff7c1c;
+		}
+		#home-nav {
+			text-align: center;
+			background-color: #90B6A8;
+			color: #FFFFFF;
+			text-align: center;
+			border-color: #90B6A8;
+			margin: 0;
+			padding: 0;
+		}
+		#home-nav-link {
+			background-color: #90B6A8;
+			color: #FFFFFF;
+			text-align: center;
+			box-shadow: 0;
+			padding: 0;
+			border-color: #ff7c1c;
+		}
+		#home-separator {
+			height: 20px;
+		}
+		.bars-icon {
+			height: 30px;
+			width: 30px;
+			background-color: #ff7c1c;
+		}
+		#bars {
+			background-color: #ff7c1c;
+			border: 0;
+			box-shadow: 0;
+			padding: 0;
+		}
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading {
+			margin: 0;
+		}
+
+		.ui-li-static.ui-collapsible {
+			padding: 0;
+		}
+
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading > .ui-btn {
+			border-top-width: 0;
+		}
+
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading.ui-collapsible-heading-collapsed > .ui-btn,
+		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+			border-bottom-width: 0;
+		}
+		.round-btn {
+			border-radius: 1.5em;
+		}
+
+	</style>
+</head>
+
+<body>
+	<!--Start of HOME page-->
+	<div data-role="page" id="home">
+
+		<div data-role="header" data-position="fixed" role="banner" id="banner" class="ui-header-ui-bar-inherit">
+
+			<center><span>GORP</span></center>
+
+			<a href="#popup" data-rel="dialog" class="ui-btn-right ui-btn" id="bars"><img class="bars-icon" src="assets/bars.svg.png" /></a>
+
+		</div><!-- /header-->
+		<div style="background-color:#ff7c1c;">
+			<img class="home-image" src="https://i.imgur.com/WcyG48S.jpg" />
+			<div class="ui-bar" id="home-separator"></div>
+		</div>
+
+		<div class="ui-grid-a" id="home-nav">
+			<div class="ui-block-a">
+				<div id="home-nav-link" class="ui-bar ui-bar-a" style="height:131px"><img src="assets/mappoints.svg.png" /><br>Map Mode</div>
+			</div>
+			<div class="ui-block-b">
+				<div id="home-nav-link" class="ui-bar ui-bar-a" style="height:131px"><img src="assets/Circledcam.svg.png" /><br>AR Mode</div>
+			</div>
+			<div class="ui-block-a">
+				<div id="home-nav-link" class="ui-bar ui-bar-a" style="height:131px"><a id="home-nav" class="ui-btn" href="#layRoute"><img src="assets/Distance.svg.png" /><br>Lay Route</a></div>
+			</div>
+			<div class="ui-block-b">
+				<div id="home-nav-link" class="ui-bar ui-bar-a" style="height:131px"><a id="home-nav" class="ui-btn" href="#manage"><img src="assets/Traveling.svg.png" /><br>Manage Routes</a></div>
+			</div>
+		</div><!-- /grid-c -->
+
+	</div>
+	<!--/end home page-->
+	<!--Start of MANAGE page-->
+	<div data-role="page" id="manage">
+		<div data-role="header" role="banner" data-position="fixed" class="ui-bar-inherit" id="banner">
+
+			<a href="#home" class="ui-btn-left ui-btn" id="bars"><img class="bars-icon" src="assets/leftcirclearrow.svg.png" /></a>
+
+
+			<center><span>GORP</span></center>
+		</div><!-- /header-->
+
+		<div data-demo-html="true" data-demo-css="#collapsible-list-item-style-flat" data-position="fixed">
+			<ul data-role="listview" data-filter="true" data-theme="a" data-filter-placeholder="Search..." data-inset="true"
+				data-shadow="false">
+				<li id="col1" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Alta Mt.</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" class="ui-btn-corner-all" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col2" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Vesper Peak</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col3" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Mt Stuart</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col4" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Dragon Tail Peak</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col5" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Black Peak</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col6" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>South Ingalls Peak</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col7" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Join Muir Base Camp</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col8" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Hibox Mountain</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col9" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Secret Spot by Mt Rainier</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col10" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Lila Lake</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+				<li id="col11" data-role="collapsible" data-iconpos="right" data-inset="false" data-collapsed-icon="carat-d"
+					data-expanded-icon="carat-u">
+					<h2>Glacier Peak</h2>
+					<p>
+						Duration: --.--<br>
+						Roundtrip Length: --.--<br>
+						Elevation Gain: --.--<br>
+					</p>
+					<input type="button" id="btn_delete_route" data-inline="true" value="Remove" data-icon="delete"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_edit_route" data-inline="true" value="Edit" data-icon="edit" data-mini="true"
+						   data-wrapper-class="center_BTN" />
+					<input type="button" id="btn_open_route" data-inline="true" value="Open in map" data-icon="location"
+						   data-mini="true" data-wrapper-class="center_BTN" />
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	<!--/end manage page-->
+	<!-- Start of LAY ROUTE-->
+	<div data-role="page" id="layRoute">
+		<div data-role="header" role="banner" data-position="fixed" class="ui-bar-inherit" id="banner">
+
+			<a href="#home" class="ui-btn-left ui-btn" id="bars"><img class="bars-icon" src="assets/leftcirclearrow.svg.png" /></a>
+
+
+			<center><span>GORP</span></center>
+		</div><!-- /header-->
+
+		<form>
+			<input type="text" name="textinput-1" id="textinput-1" data-mini="true" placeholder="Route Name..."
+				   value="">
+			<input type="number" digits="0123456789" name="textinput-2" id="textinput-2" placeholder="Interval Amount..."
+				   value="">
+			<fieldset data-role="controlgroup" data-theme="b" data-type="horizontal" data-mini="true">
+				<legend>Interval Type:</legend>
+				<input type="radio" name="radio-choice-t-6" id="radio-choice-t-6a" value="time">
+				<label for="radio-choice-t-6a">Time (sec.)</label>
+				<input type="radio" name="radio-choice-t-6" id="radio-choice-t-6b" value="dist">
+				<label for="radio-choice-t-6b">Distance (ft.)</label>
+
+			</fieldset>
+
+			<div class="ui-input-btn ui-btn ui-btn-b ui-icon-check ui-btn-icon-left ui-shadow-icon ui-corner-all">
+				Begin
+				<input type="button" data-enhanced="true" value="begin">
+			</div>
+			<div class="ui-input-btn ui-btn ui-btn-b ui-icon-delete ui-btn-icon-left ui-shadow-icon ui-corner-all">
+				End
+				<input type="button" data-enhanced="true" value="end">
+			</div>
+		</form>
+
+		<div data-role="footer" data-theme="b" data-position="fixed">
+			<h1 style="font-size:10px;">Version 1.0.0 (Smooth) &copy; 2018</h1>
+		</div><!-- /footer -->
+
+	</div>
+	<!--/end lay route page-->
+	<!-- Start of MAP MODE Page -->
+	<div data-role="page" id="mapMode">
+		<div data-role="header" role="banner" class="ui-header-ui-bar-inherit">
+			<a href="#home" class="ui-nodisc-icon ui-btn-left ui-btn ui-icon-home ui-btn-icon-left ui-corner-all ui-btn-icon-notext"
+			   data-role="button" role="button"></a>
+
+			<h3 class="ui-title" role="heading" aria-level="1">Map Mode</h3>
+		</div><!-- /header-->
+
+		<div role="main" class="ui-content">
+			<div data-role="page" id="map-page" data-url="map-page">
+				<div role="main" class="ui-content" id="map-canvas">
+
+					<!-- map loads here... -->
+				</div>
+			</div>
+		</div><!-- /content -->
+
+	</div><!-- /end map mode page -->
+	<!-- Start of SETTINGS page: popup -->
+	<div data-role="page" id="popup">
+
+		<div data-role="header" data-theme="b">
+			<h1>Popup</h1>
+		</div><!-- /header -->
+
+		<div role="main" class="ui-content">
+			<center>
+				<h2>Hi User</h2>
+
+				<p>This would be used for things like settings, edit and help dialogs</p>
+			</center>
+		</div><!-- /content -->
+
+		<div data-role="footer" data-position="fixed">
+			<h4>
+				<a data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-check ui-btn-icon-left">Save</a>
+				<a href="#home" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Cancel</a>
+			</h4>
+		</div><!-- /footer -->
+
+	</div><!-- /page popup -->
+
+</body>
+
+
+</html>
